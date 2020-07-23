@@ -15,7 +15,7 @@ function getAllUsers() {
                     $('<td>').append($('<span>')).text(user.username),
                     $('<td>').append($('<span>')).text(user.lastName),
                     $('<td>').append($('<span>')).text(user.age),
-                    $('<td>').append($('<span>')).text(user.email),
+                    $('<td>').append($('<span>')).text(user.login),
                     $('<td>').append($('<span>')).text(user.roles),
                     $('<td>').append($('<button>').text("Edit").attr({
                         "type": "button",
@@ -45,7 +45,7 @@ $(document).on("click", ".edit", function () {
 
     $('#firstNameInput').val(user.username);
     $('#lastNameInput').val(user.lastName);
-    $('#emailInput').val(user.email);
+    $('#emailInput').val(user.login);
     $('#idInput').val(user.id);
     $('#ageInput').val(user.age);
     $('#roleInput').val(user.roles);
@@ -74,7 +74,7 @@ $(document).on("click", ".delete", function () {
 
     $('#firstName').val(user.username);
     $('#lastName').val(user.lastName);
-    $('#email').val(user.email);
+    $('#email').val(user.login);
     $('#id').val(user.id);
     $('#age').val(user.age);
 })
@@ -137,7 +137,7 @@ function getUser() {
                     $('<td>').append($('<span>')).text(user.username),
                     $('<td>').append($('<span>')).text(user.lastName),
                     $('<td>').append($('<span>')).text(user.age),
-                    $('<td>').append($('<span>')).text(user.email),
+                    $('<td>').append($('<span>')).text(user.login),
                     $('<td>').append($('<span>')).text(user.roles),
                     )
                 );

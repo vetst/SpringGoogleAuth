@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUser(User user, String roles) {
         if (user.getFirstName() != null && user.getLastName() != null && user.getPassword() != null
-                && user.getEmail() != null && user.getAge() != 0) {
+                && user.getLogin() != null && user.getAge() != 0) {
             user.setRoles(utilService.getRoleForUser(roles));
             userDao.addUser(user);
             return true;
@@ -45,10 +45,20 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public boolean updateUser(User user, String roles) {
-        if (user.getId() != null && user.getFirstName() != null && user.getLastName() != null && user.getPassword() != null
-                && user.getEmail() != null && user.getAge() != 0 && roles != null) {
+    public boolean addUserJpa(User user) {
+        userRepository.save(user);
+        return true;
+    }
 
+    @Override
+    public List<User> getAllUsersJpa() {
+        return userRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public boolean updateUser(User user, String roles) {
+        if (user != null && roles != null) {
             user.setRoles(utilService.getRoleForUser(roles));
             userDao.updateUser(user);
             return true;

@@ -26,4 +26,8 @@ public interface UserService {
     Optional<User> getUserByGoogleId(String id);
 
     Optional<User> getUserByLogin(String login);
+
+    public boolean addUserJpa(User user);
+
+    public List<User> getAllUsersJpa();
 }

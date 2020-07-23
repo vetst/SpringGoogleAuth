@@ -20,16 +20,24 @@ public class User implements UserDetails {
     private String firstName;
     @Column(name = "lastName")
     private String lastName;
-    @Column(name = "email")
-    private String email;
     @Column(name = "age")
     private int age;
     @Column(name = "password")
     private String password;
     @Column(unique = true)
     private String login;
-    @Column(name="google_id")
+    @Column(name = "google_id")
     private String googleID;
+
+
+    @Column
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    private Set<Role> roles;
+
 
     public String getGoogleID() {
         return googleID;
@@ -47,14 +55,6 @@ public class User implements UserDetails {
         this.login = login;
     }
 
-    @Column
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_id"))
-    private Set<Role> roles;
-
     public User() {
 
     }
@@ -65,42 +65,36 @@ public class User implements UserDetails {
 
     }
 
-    public User(String firstName, String password, Set<Role> roles) {
-        this.firstName = firstName;
-        this.password = password;
-        this.roles = roles;
-    }
-
-    public User(String firstName, String lastName, String password, String email, int age) {
+    public User(String firstName, String lastName, String password, String login, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.email = email;
+        this.login = login;
         this.age = age;
     }
 
-    public User(String firstName, String lastName, String password, String email, int age, Set<Role> roles) {
+    public User(String firstName, String lastName, String password, String login, int age, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.email = email;
+        this.login = login;
         this.roles = roles;
         this.age = age;
     }
 
-    public User(Long id, String firstName, String lastName, String password, String email, int age) {
+    public User(Long id, String firstName, String lastName, String password, String login, int age) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.email = email;
+        this.login = login;
         this.age = age;
     }
 
-    public User(String login, String password, String googleID) {
+    public User(String login, String googleID, Set<Role> roles) {
         this.login = login;
-        this.password = password;
         this.googleID = googleID;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -139,13 +133,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public int getAge() {
         return age;

@@ -16,12 +16,11 @@ import org.springframework.security.oauth2.common.exceptions.InvalidTokenExcepti
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.stereotype.Component;
+import web.model.Role;
 import web.model.User;
 import web.service.UserService;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class CustomUserInfoTokenService extends UserInfoTokenServices {
@@ -58,12 +57,13 @@ public class CustomUserInfoTokenService extends UserInfoTokenServices {
         if (userOptional.isPresent()) {
             user = userOptional.get();
         } else {
-            String userName = (String) map.get("name");
-            user = new User(userName,
-                    userName,
-                    googleId
-            );
-            userService.addUser(user, "USER");
+            String email = (String) map.get("email");
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add(new Role(2L, "USER"));
+            user = new User(email,
+                    googleId,
+                    roleSet);
+            userService.addUserJpa(user);
         }
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 user, "", user.getAuthorities());

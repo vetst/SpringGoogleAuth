@@ -44,8 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.googleOauthRedirectFilter = googleOauthRedirectFilter;
     }
 
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();

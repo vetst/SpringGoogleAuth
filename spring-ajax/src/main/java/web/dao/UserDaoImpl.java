@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addRole(Role role){
+    public void addRole(Role role) {
         entityManager.persist(role);
     }
 
@@ -44,10 +44,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean isNotReg(String email) {
+    public boolean isNotReg(String login) {
         return getAllUser()
                 .stream()
-                .anyMatch((e) -> e.getEmail().equals(email));
+                .anyMatch((e) -> e.getLogin().equals(login));
     }
 
     @Override

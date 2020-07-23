@@ -22,14 +22,14 @@ public class UtilServiceImpl implements UtilService {
     public Set<Role> getRoleForUser(String role) {
         Set<Role> roles = new HashSet<>();
         try {
-            String[] partsRole = role.split("[, ]");
-            roles.add(new Role(partsRole[1]));
-            roles.add(new Role(partsRole[0]));
+            String[] splitRoles = role.split(",");
+            roles.add(userDao.getRoleByName(splitRoles[1]));
+            roles.add(userDao.getRoleByName(splitRoles[0]));
             return roles;
         } catch (Exception e) {
 
         }
-        roles.add(new Role(role));
+        roles.add(userDao.getRoleByName(role));
         return roles;
     }
 }
