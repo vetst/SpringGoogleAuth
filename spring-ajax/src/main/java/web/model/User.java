@@ -28,8 +28,6 @@ public class User implements UserDetails {
     private String login;
     @Column(name = "google_id")
     private String googleID;
-
-
     @Column
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

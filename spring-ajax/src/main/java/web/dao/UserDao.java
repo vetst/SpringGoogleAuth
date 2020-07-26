@@ -11,7 +11,7 @@ public interface UserDao {
 
     public void addUser(User user);
 
-    public void addRole(Role role);
+
 
     public void updateUser(User user);
 
@@ -23,5 +23,5 @@ public interface UserDao {
 
     public User getUserById(Long id);
 
-    public Role getRoleByName(String name);
+
 }

@@ -2,6 +2,7 @@ package web.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import web.dao.RoleDao;
 import web.dao.UserDao;
 import web.model.Role;
 
@@ -11,11 +12,11 @@ import java.util.Set;
 @Component
 public class UtilServiceImpl implements UtilService {
 
-    private UserDao userDao;
+    private RoleDao roleDao;
 
     @Autowired
-    public UtilServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UtilServiceImpl(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 
     @Override
@@ -23,13 +24,13 @@ public class UtilServiceImpl implements UtilService {
         Set<Role> roles = new HashSet<>();
         try {
             String[] splitRoles = role.split(",");
-            roles.add(userDao.getRoleByName(splitRoles[1]));
-            roles.add(userDao.getRoleByName(splitRoles[0]));
+            roles.add(roleDao.getRoleByName(splitRoles[1]));
+            roles.add(roleDao.getRoleByName(splitRoles[0]));
             return roles;
         } catch (Exception e) {
 
         }
-        roles.add(userDao.getRoleByName(role));
+        roles.add(roleDao.getRoleByName(role));
         return roles;
     }
 }

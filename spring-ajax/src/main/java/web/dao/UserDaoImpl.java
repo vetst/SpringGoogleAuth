@@ -23,11 +23,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addRole(Role role) {
-        entityManager.persist(role);
-    }
-
-    @Override
     public void addUser(User user) {
         entityManager.persist(user);
     }
@@ -64,11 +59,4 @@ public class UserDaoImpl implements UserDao {
         return (User) entityManager.createQuery("SELECT u FROM User u WHERE u.id = ?1")
                 .setParameter(1, id).getSingleResult();
     }
-
-    @Override
-    public Role getRoleByName(String name) {
-        return (Role) entityManager.createQuery("SELECT u FROM Role u WHERE u.name =?1")
-                .setParameter(1, name).getSingleResult();
-    }
-
 }
