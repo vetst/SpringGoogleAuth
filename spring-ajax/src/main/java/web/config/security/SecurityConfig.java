@@ -16,7 +16,6 @@ import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticat
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import web.filter.GoogleOauthRedirectFilter;
-
 import javax.servlet.Filter;
 
 @Configuration
